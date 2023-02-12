@@ -1,0 +1,29 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<html>
+    
+<head>
+
+    {% block title %}
+
+    <title>Base Template</title>
+    
+    <link rel="stylesheet" href="{% static 'thebookshop_stylesheet.css' %}">
+
+    {% endblock title %}
+
+</head>
+
+<body>
+       
+    {% block body %}
+
+    <h1>Base body</h1>
+            
+    {% endblock body %}
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Book update: {{ book.title }}</title>
+{% endblock title %}
+
+
+{% block body %}
+
+<p><a href="\books"><--Back to book list</a></p>
+<br>
+<h1>Update a book</h1>
+<br>
+
+<form method="POST" enctype="multipart/form-data">
+ 
+    <!-- Security token -->
+    {% csrf_token %}
+ 
+    <!-- Using the formset -->
+    {{ form.as_p }}
+     
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock body %}

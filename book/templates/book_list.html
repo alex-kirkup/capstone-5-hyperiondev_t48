@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- title -->
+{% block title %}
+<title>Book list</title>
+{% endblock title %}
+
+
+<!-- body html -->
+{% block body %}
+
+<!-- messages -->
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{message.tags}}">
+            {{message}}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<img src="{% static 'logo.jpg' %}">
+
+<!-- title -->
+<h1>Book list</h1>
+
+<!-- add a book -->
+<h2><a href="\books\create\">Add a new book</a></h2>
+<br>
+
+<!-- search box -->
+<form method='GET'>
+    <input type='text' name='query' value='{{ request.GET.query }}'>
+    <input class="button" type='submit' value="Search">
+</form>
+{% if request.GET.query %}
+<form action="{% url 'books_list' %}">
+    <input type='submit' value="Clear search">
+</form>
+{% endif %}
+<br>
+
+<!-- book list -->
+{% if book_list %}
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Author(s)</th>
+        <th>Stock</th>
+        <th>Options</th>
+    </tr>
+
+    {% for book in book_list %}
+
+    <tr>
+        <td>{{ book.pk }}</td>
+        <td><a href="\books\{{ book.pk }}">{{ book.title }}</a></td>
+        <td>{{ book.get_authors_str }}</td>
+        <td>{{ book.quantity }}</td>
+        <td><b><a href="\books\{{ book.pk }}\update">Update</a>&nbsp;&nbsp;<a href="\books\{{ book.pk }}\delete">Delete</a></b></td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% else %}
+    
+    <p>There are no books in the library matching your search.</p>
+
+{% endif %} 
+
+{% endblock body %}

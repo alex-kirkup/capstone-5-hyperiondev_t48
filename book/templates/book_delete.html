@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Book delete: {{ book.title }}</title>
+{% endblock title %}
+
+
+{% block body %}
+
+<p><a href="\books"><--Back</a></p>
+<br>
+<h3>{{ book.title }}</h3>
+<br>
+<p>Are you sure you want to delete this book?</p>
+<br>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Confirm">
+</form>
+
+{% endblock body %}
